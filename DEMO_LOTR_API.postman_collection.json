@@ -1,0 +1,1065 @@
+{
+	"info": {
+		"_postman_id": "6c26c986-6b6a-456a-b978-be4d9c358009",
+		"name": "DEMO_LOTR_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26642011"
+	},
+	"item": [
+		{
+			"name": "BOOK",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "GET All LOTR Books",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.environment.set('book_id', response.docs[0]['_id'])",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/book",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"book"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve information from a specific Book",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"",
+											"",
+											"pm.test(\"Book name should be equal to 'The Fellowship Of The Ring' \", () => {",
+											"    pm.expect(response.docs[0][\"name\"]).to.equal('The Fellowship Of The Ring');",
+											"})",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/book/{{book_id}}",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"book",
+										"{{book_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve all Chapters of a specific Book",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/book/{{book_id}}/chapter",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"book",
+										"{{book_id}}",
+										"chapter"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "MOVIE",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "Get the list of All LOTR movies without authentication",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 401', function () {",
+											"    pm.response.to.have.status(401);",
+											"});",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"});",
+											"",
+											"pm.test('Response should contain keys success, message', () => {",
+											"    pm.expect(response).to.have.all.keys('success', 'message');",
+											"});",
+											"",
+											"pm.test(\"Message should be equal to 'Unauthorized' \", () => {",
+											"    pm.expect(response.message).equals('Unauthorized.');",
+											"});",
+											"",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/movie",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"movie"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get the list of All LOTR movies with authentication",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test(\"docs should have all the keys _id, name, runtimeInMinutes, budgetInMillions, boxOfficeRevenueInMillions,academyAwardNominations, academyAwardWins and rottenTomatoesScore\", () => {",
+											"    pm.expect(response.docs[0]).to.have.all.keys('_id', 'name', 'runtimeInMinutes', 'budgetInMillions', 'boxOfficeRevenueInMillions','academyAwardNominations', 'academyAwardWins', 'rottenTomatoesScore');",
+											"});",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.environment.set('movie_id', response.docs[6]['_id'])",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/movie",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"movie"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a Movie By ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test(\"docs should have all the keys _id, name, runtimeInMinutes, budgetInMillions, boxOfficeRevenueInMillions,academyAwardNominations, academyAwardWins and rottenTomatoesScore\", () => {",
+											"    pm.expect(response.docs[0]).to.have.all.keys('_id', 'name', 'runtimeInMinutes', 'budgetInMillions', 'boxOfficeRevenueInMillions','academyAwardNominations', 'academyAwardWins', 'rottenTomatoesScore');",
+											"});",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.environment.set('movie_id', response.docs[0]['_id'])",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/movie/{{movie_id}}",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"movie",
+										"{{movie_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a Movie Quote by movie ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"// pm.test(\"docs should have all the keys _id,dialog, movie, character, id\", () => {",
+											"//     pm.expect(response.docs[0]).to.have.all.keys('_id','dialog', 'movie', 'character', 'id');",
+											"// });",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.environment.set('quote_id', response.docs[0]['id'])",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/movie/{{movie_id}}/quote",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"movie",
+										"{{movie_id}}",
+										"quote"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CHARACTER",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "Get the list of All LOTR Characters",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test(\"docs should have all the keys _id, height, race, gender, birth, spouse, death, realm, hair, name, wikiUrl\", () => {",
+											"    pm.expect(response.docs[0]).to.have.all.keys('_id', 'height', 'race', 'gender', 'birth', 'spouse', 'death', 'realm', 'hair', 'name', 'wikiUrl');",
+											"});",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"for (let i=0; i<response.docs.length;i++){",
+											"    let found = response.docs[i][\"name\"].includes('Frodo')",
+											"    console.log(found);",
+											"    if (found == true){",
+											"        pm.environment.set('character_id', response.docs[i]['_id'])",
+											"        break;",
+											"    }",
+											"}",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/character",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"character"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Character By ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test(\"docs should have all the keys _id, height, race, gender, birth, spouse, death, realm, hair, name, wikiUrl\", () => {",
+											"    pm.expect(response.docs[0]).to.have.all.keys('_id', 'height', 'race', 'gender', 'birth', 'spouse', 'death', 'realm', 'hair', 'name', 'wikiUrl');",
+											"});",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/character/{{character_id}}",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"character",
+										"{{character_id}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Movie quotes of one specific character",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test(\"docs should have all the keys _id, dialog, movie, character, id\", () => {",
+											"    pm.expect(response.docs[0]).to.have.all.keys('_id', 'dialog', 'movie', 'character', 'id');",
+											"});",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/character/{{character_id}}/quote",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"character",
+										"{{character_id}}",
+										"quote"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "QUOTE",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "Get the list of all movie quotes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test(\"docs should have all the keys _id, dialog, movie, character, id\", () => {",
+											"    pm.expect(response.docs[0]).to.have.all.keys('_id', 'dialog', 'movie', 'character', 'id');",
+											"});",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"",
+											"pm.environment.set('quote_id', response.docs[0][\"id\"]);",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/quote",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"quote"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get a specific quote by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test(\"docs should have all the keys _id, dialog, movie, character, id\", () => {",
+											"    pm.expect(response.docs[0]).to.have.all.keys('_id', 'dialog', 'movie', 'character', 'id');",
+											"});",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"",
+											"pm.environment.set('quote_id', response.docs[0][\"id\"]);",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/quote/{{quote_id}}",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"quote",
+										"{{quote_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CHAPTER",
+			"item": [
+				{
+					"name": "GET",
+					"item": [
+						{
+							"name": "Get the list of all book Chapters",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test(\"docs should have all the keys _id, chapterName, book\", () => {",
+											"    pm.expect(response.docs[0]).to.have.all.keys('_id', 'chapterName', 'book');",
+											"});",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.environment.set(\"chapter_id\", response.docs[0][\"_id\"]);",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/chapter",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"chapter"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get one specific Chapter by ID",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"let response = pm.response.json();",
+											"",
+											"pm.test('Status code is 200', function () {",
+											"    pm.response.to.have.status(200);",
+											"})",
+											"",
+											"pm.test('Response time is less than 200ms', function () {",
+											"    pm.expect(pm.response.responseTime).to.be.below(500);",
+											"})",
+											"",
+											"pm.test('Response should contain keys docs, total, limit, offset, page and pages', () => {",
+											"    pm.expect(response).to.have.all.keys('docs', 'total', 'limit', 'offset', 'page', 'pages');",
+											"})",
+											"",
+											"pm.test(\"docs should have all the keys _id, chapterName, book\", () => {",
+											"    pm.expect(response.docs[0]).to.have.all.keys('_id', 'chapterName', 'book');",
+											"});",
+											"",
+											"pm.test('Docs length should be more than zero', () => {",
+											"    pm.expect(response.docs).length.above(0);",
+											"})",
+											"",
+											"pm.test(\"All of the IDs should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"_id\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"pm.test(\"All of the names should not be null\", () => {",
+											"    for(let i=0; i<response.docs.length; i++ ){",
+											"        pm.expect(response.docs[i][\"name\"]).to.not.equal(null);",
+											"    }",
+											"});",
+											"",
+											"",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://the-one-api.dev/v2/chapter/{{chapter_id}}",
+									"protocol": "https",
+									"host": [
+										"the-one-api",
+										"dev"
+									],
+									"path": [
+										"v2",
+										"chapter",
+										"{{chapter_id}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
