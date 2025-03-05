@@ -1,6 +1,8 @@
 {
 	"info": {
 		"_postman_id": "039e6404-0fd4-49ed-ad8f-74de50d71388",
+
+
 		"name": "DEMO_LOTR_API",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26642011"
@@ -28,6 +30,7 @@
 											"",
 											"",
 											"pm.test('Response time is less than 500ms', function () {",
+
 											"    pm.expect(pm.response.responseTime).to.be.below(500);",
 											"})",
 											"",
