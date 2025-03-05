@@ -9,10 +9,10 @@
 
 name: Run API Tests
 
-#on: [push, pull_request]
-on:
-  schedule:
-    - cron: '0 22 * * *'
+on: [push, pull_request]
+# on:
+#   schedule:
+#     - cron: '0 22 * * *'
 
 jobs:
   test:
@@ -25,13 +25,19 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
+      - name: Install HTML REPORT
+        run: npm install newman-reporter-htmlextra
+
       - name: Debug - List Files
         run: ls -R
 
       - name: Run API Tests
-        run: newman run DEMO_LOTR_API.postman_collection.json -e LOTR_API_ENVIRONMENT.postman_environment.json --env-var api_key=${{ secrets.API_KEY }}
+        run: newman run DEMO_LOTR_API.postman_collection.json -e LOTR_API_ENVIRONMENT.postman_environment.json --env-var api_key=${{ secrets.API_KEY }} -r htmlextra
 
-
+      - uses: actions/upload-artifact@master
+        with:
+          name: report.html
+          path: newman/*.html
 
 #name: My First GitHubActions pipeline
 # on:
