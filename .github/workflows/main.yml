@@ -19,17 +19,17 @@ jobs:
 
     steps:
 
-      # - name: Install Node and NPM
-      #   run: sudo apt update && sudo apt install nodejs && sudo node -v && sudo apt install npm && npm -v
+      - name: Install Node and NPM
+        run: sudo apt update && sudo apt install nodejs && sudo node -v && sudo apt install npm && npm -v
 
-      # - name: Install Newman
-      #   run: npm install -g newman
+      - name: Install Newman
+        run: npm install -g newman
 
-      # # - name: Check for the files and directories
-      # #   run: ls -a && cd .. && ls && cd API_TESTS_TKINTER
+      # - name: Check for the files and directories
+      #   run: ls -a && cd .. && ls && cd API_TESTS_TKINTER
 
-      # - name: Run API Tests with Newman
-      #   run: newman run DEMO_LOTR_API.postman_collection.json --delay-request 200 -e LOTR_API_ENVIRONMENT.postman_environment.json
+      - name: Run API Tests with Newman
+        run: newman run API_TESTS/DEMO_LOTR_API.postman_collection.json --delay-request 200 -e API_TESTS/LOTR_API_ENVIRONMENT.postman_environment.json
 
-      - name: Debug - List Files
-        run: cd .. && cd .. && cd API_TESTS_TKINTER && cd API_TESTS_TKINTER && ls -R
+      # - name: Debug - List Files
+      #   run: cd .. && cd .. && cd API_TESTS_TKINTER && ls -R
