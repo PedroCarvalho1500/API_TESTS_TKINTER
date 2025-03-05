@@ -30,5 +30,7 @@ jobs:
 
       - name: Run API Tests with Newman
         #run: cd .. && cd API_TESTS_TKINTER && newman run DEMO_LOTR_API.postman_collection.json --delay-request 200 -e LOTR_API_ENVIRONMENT.postman_environment.json
-        run: cd ../API_TESTS_TKINTER && ls -a
+        working-directory: ./API_TESTS_TKINTER
+        run: 
+          ls -a
         
