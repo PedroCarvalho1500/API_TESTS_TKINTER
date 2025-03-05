@@ -1,6 +1,5 @@
 # This is a basic workflow that is manually triggered
 
-name: My First GitHubActions pipeline
 
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
@@ -8,28 +7,52 @@ name: My First GitHubActions pipeline
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 
 
-on:
-  push:
-    branches:
-      'main'
+name: Run API Tests
+
+on: [push, pull_request]
 
 jobs:
-  run_first_actions:
-    runs-on: ubuntu-20.04
+  test:
+    runs-on: ubuntu-latest
 
     steps:
-
-      - name: Install Node and NPM
-        run: sudo apt update && sudo apt install nodejs && sudo node -v && sudo apt install npm && npm -v
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Install Newman
         run: npm install -g newman
 
-      # - name: Check for the files and directories
-      #   run: ls -a && cd .. && ls && cd API_TESTS_TKINTER
+      - name: Debug - List Files
+        run: ls -R
 
-      - name: Run API Tests with Newman
-        run: newman run API_TESTS/DEMO_LOTR_API.postman_collection.json --delay-request 200
+      - name: Run API Tests
+        run: newman run API_TESTS/DEMO_LOTR_API.postman_collection.json -e API_TESTS/LOTR_API_ENVIRONMENT.postman_environment.json
+
+
+
+#name: My First GitHubActions pipeline
+# on:
+#   push:
+#     branches:
+#       'main'
+
+# jobs:
+#   run_first_actions:
+#     runs-on: ubuntu-20.04
+
+#     steps:
+
+#       - name: Install Node and NPM
+#         run: sudo apt update && sudo apt install nodejs && sudo node -v && sudo apt install npm && npm -v
+
+#       - name: Install Newman
+#         run: npm install -g newman
+
+#       # - name: Check for the files and directories
+#       #   run: ls -a && cd .. && ls && cd API_TESTS_TKINTER
+
+#       - name: Run API Tests with Newman
+#         run: newman run API_TESTS/DEMO_LOTR_API.postman_collection.json --delay-request 200
 
       # - name: Debug - List Files
       #   run: cd .. && cd .. && cd API_TESTS_TKINTER && ls -R
