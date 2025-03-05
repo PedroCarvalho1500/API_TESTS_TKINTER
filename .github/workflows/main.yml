@@ -29,7 +29,7 @@ jobs:
       #   run: ls -a && cd .. && ls && cd API_TESTS_TKINTER
 
       - name: Run API Tests with Newman
-        run: newman run API_TESTS/DEMO_LOTR_API.postman_collection.json --delay-request 200 -e API_TESTS/LOTR_API_ENVIRONMENT.postman_environment.json
+        run: newman run API_TESTS/DEMO_LOTR_API.postman_collection.json --delay-request 200
 
       # - name: Debug - List Files
       #   run: cd .. && cd .. && cd API_TESTS_TKINTER && ls -R
