@@ -20,4 +20,10 @@ jobs:
     steps:
 
       - name: Install Node and NPM
-        run: sudo apt update && sudo apt install nodejs && sudo node -v
+        run: sudo apt update && sudo apt install nodejs && sudo node -v && sudo apt install npm && npm -v
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Check for the files and directories
+        run: ls -a && cd .. && ls
