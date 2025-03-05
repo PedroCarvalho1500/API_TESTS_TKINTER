@@ -20,4 +20,4 @@ jobs:
     steps:
 
       - name: Install Node and NPM
-        run: apt update && apt install nodejs && node -v
+        run: sudo apt update && apt install nodejs && node -v
