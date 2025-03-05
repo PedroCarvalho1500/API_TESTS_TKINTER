@@ -26,7 +26,7 @@ jobs:
         run: npm install -g newman
 
       - name: Install HTML REPORT
-        run: npm install newman-reporter-htmlextra
+        run: npm install -g newman-reporter-htmlextra
 
       - name: Debug - List Files
         run: ls -R
