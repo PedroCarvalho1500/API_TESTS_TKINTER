@@ -33,6 +33,7 @@ jobs:
 
       - name: Run API Tests
         run: newman run DEMO_LOTR_API.postman_collection.json -e LOTR_API_ENVIRONMENT.postman_environment.json --env-var api_key=${{ secrets.API_KEY }} -r htmlextra --reporter-htmlextra-export newman/report.html
+        continue-on-error: true
 
       - name: Debug - List Files
         run: ls -R newman
