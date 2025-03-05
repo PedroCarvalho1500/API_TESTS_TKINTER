@@ -26,4 +26,7 @@ jobs:
         run: npm install -g newman
 
       - name: Check for the files and directories
-        run: ls -a && cd .. && ls
+        run: ls -a && cd .. && ls && cd API_TESTS_TKINTER
+
+      - name: Run API Tests with Newman
+        run: newman run DEMO_LOTR_API.postman_collection.json --delay-request 200 -e LOTR_API_ENVIRONMENT.postman_environment.json
