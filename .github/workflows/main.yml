@@ -32,4 +32,4 @@ jobs:
       #   run: newman run DEMO_LOTR_API.postman_collection.json --delay-request 200 -e LOTR_API_ENVIRONMENT.postman_environment.json
 
       - name: Debug - List Files
-        run: cd .. && cd .. && ls -R
+        run: cd .. && cd .. && cd API_TESTS_TKINTER && ls -R
