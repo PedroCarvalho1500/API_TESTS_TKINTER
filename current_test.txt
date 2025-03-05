@@ -2,50 +2,58 @@ newman
 
 DEMO_LOTR_API
 
-❏ QUOTE / GET
-↳ Get the list of all movie quotes
-  GET https://the-one-api.dev/v2/quote [200 OK, 207.61kB, 2.2s]
+❏ BOOK / GET
+↳ GET All LOTR Books
+  GET https://the-one-api.dev/v2/book [200 OK, 1.15kB, 1126ms]
   ✓  Status code is 200
   1. Response time is less than 200ms
   ✓  Response should contain keys docs, total, limit, offset, page and pages
-  ✓  docs should have all the keys _id, dialog, movie, character, id
   ✓  Docs length should be more than zero
   ✓  All of the IDs should not be null
   ✓  All of the names should not be null
 
-↳ Get a specific quote by ID
-  GET https://the-one-api.dev/v2/quote/5cd96e05de30eff6ebcce7e9 [200 OK, 1.17kB, 297ms]
+↳ Retrieve information from a specific Book
+  GET https://the-one-api.dev/v2/book/5cf5805fb53e011a64671582 [200 OK, 1.03kB, 263ms]
   ✓  Status code is 200
   ✓  Response time is less than 200ms
   ✓  Response should contain keys docs, total, limit, offset, page and pages
-  ✓  docs should have all the keys _id, dialog, movie, character, id
+  ✓  Docs length should be more than zero
+  ✓  All of the IDs should not be null
+  ✓  All of the names should not be null
+  ✓  Book name should be equal to 'The Fellowship Of The Ring' 
+
+↳ Retrieve all Chapters of a specific Book
+  GET https://the-one-api.dev/v2/book/5cf5805fb53e011a64671582/chapter [200 OK, 2.55kB, 310ms]
+  ✓  Status code is 200
+  ✓  Response time is less than 200ms
+  ✓  Response should contain keys docs, total, limit, offset, page and pages
   ✓  Docs length should be more than zero
   ✓  All of the IDs should not be null
   ✓  All of the names should not be null
 
-┌─────────────────────────┬─────────────────────┬────────────────────┐
-│                         │            executed │             failed │
-├─────────────────────────┼─────────────────────┼────────────────────┤
-│              iterations │                   1 │                  0 │
-├─────────────────────────┼─────────────────────┼────────────────────┤
-│                requests │                   2 │                  0 │
-├─────────────────────────┼─────────────────────┼────────────────────┤
-│            test-scripts │                   2 │                  0 │
-├─────────────────────────┼─────────────────────┼────────────────────┤
-│      prerequest-scripts │                   0 │                  0 │
-├─────────────────────────┼─────────────────────┼────────────────────┤
-│              assertions │                  14 │                  1 │
-├─────────────────────────┴─────────────────────┴────────────────────┤
-│ total run duration: 3.1s                                           │
-├────────────────────────────────────────────────────────────────────┤
-│ total data received: 206.88kB (approx)                             │
-├────────────────────────────────────────────────────────────────────┤
-│ average response time: 1296ms [min: 297ms, max: 2.2s, s.d.: 999ms] │
-└────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────┬─────────────────────┬─────────────────────┐
+│                         │            executed │              failed │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│              iterations │                   1 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│                requests │                   3 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│            test-scripts │                   3 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│      prerequest-scripts │                   0 │                   0 │
+├─────────────────────────┼─────────────────────┼─────────────────────┤
+│              assertions │                  19 │                   1 │
+├─────────────────────────┴─────────────────────┴─────────────────────┤
+│ total run duration: 2.4s                                            │
+├─────────────────────────────────────────────────────────────────────┤
+│ total data received: 2.05kB (approx)                                │
+├─────────────────────────────────────────────────────────────────────┤
+│ average response time: 566ms [min: 263ms, max: 1126ms, s.d.: 396ms] │
+└─────────────────────────────────────────────────────────────────────┘
 
-  #  failure         detail                                                  
-                                                                             
- 1.  AssertionError  Response time is less than 200ms                        
-                     expected 2296 to be below 500                           
-                     at assertion:1 in test-script                           
-                     inside "QUOTE / GET / Get the list of all movie quotes" 
+  #  failure         detail                                   
+                                                              
+ 1.  AssertionError  Response time is less than 200ms         
+                     expected 1126 to be below 500            
+                     at assertion:1 in test-script            
+                     inside "BOOK / GET / GET All LOTR Books" 
